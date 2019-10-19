@@ -25,6 +25,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private
     ListView lvEpisodes;     //Reference to the listview GUI component
     ListAdapter lvAdapter;   //Reference to the Adapter used to populate the listview.
+
     SharedPreferences sp;
 
     @Override
@@ -200,6 +202,7 @@ class MyCustomAdapter extends BaseAdapter {
         episodeImages.add(R.drawable.st_mirror_mirror__evil_spock_and_good_kirk);
         episodeImages.add(R.drawable.st_platos_stepchildren__kirk_spock);
         episodeImages.add(R.drawable.st_the_naked_time__sulu_sword);
+        episodeImages.add(R.drawable.st_the_trouble_with_tribbles__kirk_tribbles);
 
         this.sp = sp;
     }

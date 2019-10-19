@@ -20,25 +20,31 @@
 
     <item
         android:id="@+id/mnu_two"
-        android:title="Menu2"
+        android:title="Sort by title"
         android:icon ="@drawable/kirk_spock1"
         app:showAsAction="ifRoom">
     </item>
 
     <item
         android:id="@+id/mnu_three"
-        android:title="Menu3"
+        android:title="Sort by rating"
         android:icon ="@drawable/ic_brightness_3_black_24dp"
         app:showAsAction="ifRoom">
     </item>
 
     <item
         android:id="@+id/mnu_four"
-        android:title="Menu4"
+        android:title="Live Long and Prosper"
         android:icon ="@drawable/ic_local_florist_black_24dp"
         app:showAsAction="ifRoom">
     </item>
 
+    <item
+        android:id="@+id/mnu_five"
+        android:title="Khan!!!"
+        android:icon ="@drawable/ic_local_florist_black_24dp"
+        app:showAsAction="ifRoom">
+    </item>
 
 
 </menu>
