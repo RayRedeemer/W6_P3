@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         lvEpisodes = (ListView)findViewById(R.id.lvEpisodes);
         lvAdapter = new MyCustomAdapter(this.getBaseContext(), sp);  //instead of passing the boring default string adapter, let's pass our own, see class MyCustomAdapter below!
         lvEpisodes.setAdapter(lvAdapter);
+
         lvEpisodes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
