@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.media.Rating;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -21,9 +22,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.MediaController;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -121,6 +124,34 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.mnu_three) {
             Toast.makeText(getBaseContext(), "Hangup it's a telemarketer.", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        if (id == R.id.mnu_four) {
+
+            MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.live_long_and_prosper);
+            mp.start();
+            return true;
+        }
+
+        if (id == R.id.mnu_five) {
+            //Uri vdurl = Uri.parse("android.resource://" + getPackageName() + "/" +  R.raw.kahn);
+            String path = "file:/android.resource://com.example.sse.customlistview_sse/"+R.raw.live_long_and_prosper;
+            Uri vdurl = Uri.parse(path);
+            Intent intent = new Intent(Intent.ACTION_VIEW, vdurl);
+//            intent.setDataAndType(vdurl, "video/*");
+
+            //intent.setDataAndType(Uri.parse(path), "video/mp4");
+            startActivity(intent);
+
+//            VideoView videoHolder = new VideoView(this);
+////if you want the controls to appear
+//            videoHolder.setMediaController(new MediaController(this));
+//            Uri video = Uri.parse("android.resource://" + getPackageName() + "/"
+//                    + R.raw.kahn); //do not add any extension
+////if your file is named sherif.mp4 and placed in /raw
+////use R.raw.sherif
+
             return true;
         }
 

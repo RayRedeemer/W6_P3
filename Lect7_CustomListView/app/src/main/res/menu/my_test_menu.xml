@@ -41,10 +41,9 @@
 
     <item
         android:id="@+id/mnu_five"
-        android:title="Khan!!!"
-        android:icon ="@drawable/ic_local_florist_black_24dp"
-        app:showAsAction="ifRoom">
-    </item>
+        android:icon="@drawable/ic_local_florist_black_24dp"
+        android:title="Kahn!!!"
+        app:showAsAction="ifRoom"></item>
 
 
 </menu>
