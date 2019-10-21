@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.media.Rating;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,9 +26,12 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -118,23 +122,28 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.mnu_two) {
+            ((MyCustomAdapter) lvAdapter).sortByTitle();
+            ((MyCustomAdapter) lvAdapter).notifyDataSetChanged();
+            return true;
+        }
+
         if (id == R.id.mnu_three) {
-            Toast.makeText(getBaseContext(), "Hangup it's a telemarketer.", Toast.LENGTH_LONG).show();
+//            Toast.makeText(getBaseContext(), "Hangup it's a telemarketer.", Toast.LENGTH_LONG).show();
+            ((MyCustomAdapter) lvAdapter).sortByRating();
+            ((MyCustomAdapter) lvAdapter).notifyDataSetChanged();
             return true;
         }
 
         if (id == R.id.mnu_four) {
-
             MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.live_long_and_prosper);
             mp.start();
             return true;
         }
 
         if (id == R.id.mnu_five) {
-
             Intent intent = new Intent(this, VideoPlayer.class);
             startActivity(intent);
-
             return true;
         }
 
@@ -172,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
 
 //STEP 1: Create references to needed resources for the ListView Object.  String Arrays, Images, etc.
 
-class MyCustomAdapter extends BaseAdapter {
+class MyCustomAdapter extends BaseAdapter{
 
     SharedPreferences sp;
 
@@ -193,6 +202,7 @@ class MyCustomAdapter extends BaseAdapter {
     public SharedPreferences getSp(){
         return sp;
     }
+
 
     //STEP 2: Override the Constructor, be sure to:
     // grab the context, we will need it later, the callback gets it as a parm.
@@ -220,6 +230,23 @@ class MyCustomAdapter extends BaseAdapter {
         episodeImages.add(R.drawable.st_the_trouble_with_tribbles__kirk_tribbles);
 
         this.sp = sp;
+    }
+
+    public void sortByTitle() {
+        Log.i("Warning", "Sort by title called");
+        for (int i = 0; i < episodes.length; i++) {
+            Log.i("before sorting", episodes[i].toString());
+        }
+        Arrays.sort(episodes);
+//        Collections.sort(episodes);
+        for (int i = 0; i < episodes.length; i++) {
+            Log.i("after sorting", episodes[i].toString());
+        }
+
+    }
+
+    public void sortByRating() {
+        Log.i("Warning", "Sort by rating called");
     }
 
     //STEP 3: Override and implement getCount(..), ListView uses this to determine how many rows to render.
@@ -269,10 +296,13 @@ class MyCustomAdapter extends BaseAdapter {
 
         tvEpisodeTitle.setText(episodes[position]);
         tvEpisodeDescription.setText(episodeDescriptions[position]);
+//         tvEpisodeTitle.setText(episodes.get(position));
+//         tvEpisodeDescription.setText(episodeDescriptions.get(position));
         imgEpisode.setImageResource(episodeImages.get(position).intValue());
 
         btnRandom = (Button) row.findViewById(R.id.btnRandom);
         final String randomMsg = ((Integer)position).toString() +": "+ episodeDescriptions[position];
+//        final String randomMsg = ((Integer)position).toString() +": "+ episodeDescriptions.get(position);
         btnRandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -283,7 +313,7 @@ class MyCustomAdapter extends BaseAdapter {
         rbEpisode = (RatingBar) row.findViewById(R.id.rbEpisode);
 
         rbEpisode.setRating(sp.getFloat("pos" + String.valueOf(position),3f));
-
+        Log.i("pos for rating", String.valueOf(position));
         rbEpisode.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -300,7 +330,6 @@ class MyCustomAdapter extends BaseAdapter {
 //return convertView;
 
     }
-
 
 
     ///Helper method to get the drawables...///
