@@ -22,13 +22,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.MediaController;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
-
-import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -135,22 +131,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (id == R.id.mnu_five) {
-            //Uri vdurl = Uri.parse("android.resource://" + getPackageName() + "/" +  R.raw.kahn);
-            String path = "file:/android.resource://com.example.sse.customlistview_sse/"+R.raw.live_long_and_prosper;
-            Uri vdurl = Uri.parse(path);
-            Intent intent = new Intent(Intent.ACTION_VIEW, vdurl);
-//            intent.setDataAndType(vdurl, "video/*");
 
-            //intent.setDataAndType(Uri.parse(path), "video/mp4");
+            Intent intent = new Intent(this, VideoPlayer.class);
             startActivity(intent);
-
-//            VideoView videoHolder = new VideoView(this);
-////if you want the controls to appear
-//            videoHolder.setMediaController(new MediaController(this));
-//            Uri video = Uri.parse("android.resource://" + getPackageName() + "/"
-//                    + R.raw.kahn); //do not add any extension
-////if your file is named sherif.mp4 and placed in /raw
-////use R.raw.sherif
 
             return true;
         }
@@ -219,7 +202,7 @@ class MyCustomAdapter extends BaseAdapter {
 //initializing our data in the constructor.
         context = aContext;  //saving the context we'll need it again.
 
-        episodes =aContext.getResources().getStringArray(R.array.episodes);  //retrieving list of episodes predefined in strings-array "episodes" in strings.xml
+        episodes = aContext.getResources().getStringArray(R.array.episodes);  //retrieving list of episodes predefined in strings-array "episodes" in strings.xml
         episodeDescriptions = aContext.getResources().getStringArray(R.array.episode_descriptions);
 
 //This is how you would do it if you were using an ArrayList, leaving code here for reference, though we could use it instead of the above.
