@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private
     ListView lvEpisodes;     //Reference to the listview GUI component
     ListAdapter lvAdapter;   //Reference to the Adapter used to populate the listview.
+    ListAdapter sbtAdapter;
 
     SharedPreferences sp;
 
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         lvEpisodes = (ListView)findViewById(R.id.lvEpisodes);
         lvAdapter = new MyCustomAdapter(this.getBaseContext(), sp);  //instead of passing the boring default string adapter, let's pass our own, see class MyCustomAdapter below!
         lvEpisodes.setAdapter(lvAdapter);
+        sbtAdapter = new SortByTitle(this.getBaseContext(),sp);
 
         lvEpisodes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -123,8 +125,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (id == R.id.mnu_two) {
-            ((MyCustomAdapter) lvAdapter).sortByTitle();
-            ((MyCustomAdapter) lvAdapter).notifyDataSetChanged();
+//            ((MyCustomAdapter) lvAdapter).sortByTitle();
+//            ((MyCustomAdapter) lvAdapter).notifyDataSetChanged();
+            lvEpisodes.setAdapter(sbtAdapter);
             return true;
         }
 
@@ -329,6 +332,10 @@ class MyCustomAdapter extends BaseAdapter{
         return row;  //once the row is fully constructed, return it.  Hey whatif we had buttons, can we target onClick Events within the rows, yep!
 //return convertView;
 
+    }
+
+    public String[] getEpisodes(){
+        return episodes;
     }
 
 
