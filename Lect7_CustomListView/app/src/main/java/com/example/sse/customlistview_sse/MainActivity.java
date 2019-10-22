@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private
     ListView lvEpisodes;     //Reference to the listview GUI component
     ListAdapter lvAdapter;   //Reference to the Adapter used to populate the listview.
-    ListAdapter sbtAdapter;
+    ListAdapter sbtAdapter;  //adapter for sorting by title
+    ListAdapter sbvAdapter;  //adapter for sorting by rating
 
     SharedPreferences sp;
 
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         lvAdapter = new MyCustomAdapter(this.getBaseContext(), sp);  //instead of passing the boring default string adapter, let's pass our own, see class MyCustomAdapter below!
         lvEpisodes.setAdapter(lvAdapter);
         sbtAdapter = new SortByTitle(this.getBaseContext(),sp);
+        sbvAdapter = new SortByValue(this.getBaseContext(),sp);
 
         lvEpisodes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -133,8 +135,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.mnu_three) {
 //            Toast.makeText(getBaseContext(), "Hangup it's a telemarketer.", Toast.LENGTH_LONG).show();
-            ((MyCustomAdapter) lvAdapter).sortByRating();
-            ((MyCustomAdapter) lvAdapter).notifyDataSetChanged();
+//            ((MyCustomAdapter) lvAdapter).sortByRating();
+//            ((MyCustomAdapter) lvAdapter).notifyDataSetChanged();
+            lvEpisodes.setAdapter(sbvAdapter);
             return true;
         }
 
